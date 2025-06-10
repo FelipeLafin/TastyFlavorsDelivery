@@ -1,0 +1,316 @@
+body {
+    font-family: "Roboto Slab", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    font-family: sans-serif;
+    text-decoration: none;
+}
+
+/*APP BAR FIXA NO TOPO*/
+.app-bar {
+    border-bottom: 3px solid black;
+    margin: 0;
+    top: 0;
+    color: black;
+    width: 100%;
+    position: fixed;
+    background: #ffefb1;
+}
+
+.cd__main {
+    display: none;
+}
+
+.mobile-bottom-nav {
+    display: none;
+}
+
+.mobile-bottom-nav__item {
+    display: none;
+}
+
+.mobile-bottom-nav__item--active {
+    display: none;
+    color: red;
+}
+
+.cor {
+    text-align: center;
+    color: black;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.meio {
+    font-weight: bold;
+    color: black;
+    margin: 10px;
+    font-size: 40px;
+    text-align: center;
+}
+
+.nav {
+    max-width: 1280px;
+    height: 100px;
+    margin-inline: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+}
+
+.logo img {
+    width: 100px;
+}
+
+.nav-list {
+    bottom: 0px;
+    display: flex;
+    gap: 32px;
+    color: black;
+    list-style: none;
+}
+
+.botao_individual:hover {
+    cursor: pointer;
+    color: red;
+}
+
+.nav-list a {
+    font-size: 18px;
+    color: black;
+    padding: 16px;
+}
+
+.fundo {
+    margin-top: 20%;
+    background: center / cover no-repeat url("https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/Story%20Agendou%20Chegou%20Amarelo%20Popular_20241101_112122_0000.png?v=1730471031958");
+}
+
+.icone_menu {
+    display: none;
+    border: none;
+    margin-right: 40px;
+    background: none;
+    border-top: 3px solid transparent;
+    cursor: pointer;
+}
+
+/*Botões funcionais*/
+.botão_cadastro {
+    box-shadow: inset 0px 0px 0px 0px black;
+    background-color: #FDB033;
+    border-radius: 7px;
+    border: 2px solid black;
+    display: inline-block;
+    cursor: pointer;
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 12px;
+    text-decoration: none;
+}
+
+p:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.botão_cadastro:hover {
+    border: 2px solid black;
+    background-color: #ff0000;
+    color: white;
+}
+
+.botão_cadastro:active {
+    border: 2px solid black;
+    position: relative;
+    top: 1px;
+}
+
+.botão_login {
+    box-shadow: inset 0px 0px 0px 0px black;
+    background-color: #FDB033;
+    border-radius: 7px;
+    border: 2px solid black;
+    display: inline-block;
+    cursor: pointer;
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 12px;
+    text-decoration: none;
+}
+
+.botão_login:hover {
+    border: 2px solid black;
+    background-color: #ff0000;
+    color: white;
+}
+
+.botão_login:active {
+    border: 2px solid black;
+    position: relative;
+    top: 1px;
+}
+
+/* RODAPÉ */
+footer {
+    position: absolute;
+    gap: 6px;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid black;
+    background: linear-gradient(180deg, #E69A2C, #333333);
+    color: #ffffff;
+}
+
+.botao-maior:hover {
+    width: 25px;
+}
+
+.cor-padrao {
+    color: white;
+}
+
+.cor-padrao:hover {
+    color: red;
+}
+
+.footer-container {
+    gap: 0;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+}
+
+.footer-section {
+    align-items: center;
+    flex: 1;
+    padding: 10px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 10px;
+    background-color: #222222;
+}
+
+/*FUNDO MAIOR PARA PC*/
+@media (min-width: 751px) {
+    .fundo {
+        margin-top: 20%;
+        background: #f8b40c;
+    }
+}
+
+/*VERSÃO MOBILE*/
+@media (max-width: 750px) {
+    footer {
+        display: none;
+    }
+
+    .cd__main {
+        position: fixed;
+        width: 360px;
+        height: 720px;
+        border: 2px solid #bbbbbb;
+    }
+
+    .mobile-bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        will-change: transform;
+        transform: translateZ(0);
+        display: flex;
+        height: 70px;
+        box-shadow: 0 -2px 5px -2px #333333;
+        background-color: #ffffff;
+    }
+
+    .mobile-bottom-nav__item {
+        flex-grow: 1;
+        text-align: center;
+        font-size: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .mobile-bottom-nav__item--active {
+        color: red;
+    }
+
+    .mobile-bottom-nav__item-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cor {
+        color: transparent;
+        text-align: center;
+        font-size: 35px;
+        margin-top: 40%;
+        font-weight: bold;
+
+    }
+
+    .meio {
+        font-weight: bold;
+        color: transparent;
+        margin-top: 10%;
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .fundo {
+        z-index: 0;
+        width: 100%;
+        margin-top: 560px;
+        background: center / no-repeat url("https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/Story%20Agendou%20Chegou%20Amarelo%20Popular_20241101_112122_0000.png?v=1730471031958");
+    }
+
+    .icone_menu {
+        margin: 2%;
+        display: block;
+        z-index: 1;
+    }
+
+    .nav-list {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #850003;
+        clip-path: circle(100px at 90% -25%);
+        transition: 0.3s ease-out;
+        flex-direction: column;
+        margin-left: 60%;
+        align-items: left;
+        gap: 1;
+        pointer-events: none;
+    }
+
+    .nav-list a {
+        font-size: 16px;
+        gap: 5px;
+        color: white;
+    }
+
+    .nav.active .nav-list {
+        clip-path: circle(1500px at 90% -25%);
+        pointer-events: all;
+    }
+}

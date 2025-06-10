@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food App UI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/paginaInicial.css') }}">
+
+</head>
+
+<body>
+    <div class="app">
+        <header>
+            <div class="texto-perfil">
+                <div class="perfil">
+                    {{ session['nome_do_restaurante'][:2]|upper }}
+                </div>
+                <div>
+                    <div style="font-weight: bold;">{{ session['nome_do_restaurante'] }}</div>
+                    <div style="font-size: small; color: #e2e2e2;">{{ session['email_restaurante'] }}</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="search-bar">
+            <input type="text" placeholder="O que você quer comer?">
+        </div>
+
+        <div class="categories">
+            <div class="category red">Sobremesas</div>
+            <div class="category">Alta Gastronomia</div>
+            <div class="category">Hambúrgueres</div>
+            <div class="category">Sushi</div>
+            <div class="category">Pizzas</div>
+            <div class="category">Saudável</div>
+        </div>
+
+        <div class="recommended">
+            <h2>Recomendados</h2>
+            <div class="recommended-grid">
+                {% for nome, preco, imagem in recomendados %}
+                <div class="food-item">
+                    <img src="{{ imagem }}">
+                    <div class="food-info">
+                        <h3>{{ nome }}</h3>
+                        <p>R${{ "%.2f"|format(preco) }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>         
+            <div class="order-button">Solicitar pedido</div>
+        <nav class="mobile-bottom-nav">
+            <section class="mobile-bottom-nav__item mobile-bottom-nav__item--active">
+                <div class="mobile-bottom-nav__item-content">
+                    <i class="material-icons"><img
+                            src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/home.svg?v=1727639490871"></i>
+                    menu
+                </div>
+            </section>
+
+            <section class="mobile-bottom-nav__item">
+                <div class="mobile-bottom-nav__item-content">
+                    <i class="material-icons"><img
+                            src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/envelope.svg?v=1727639475152"></i>
+                    email
+                </div>
+            </section>
+
+            <section class="mobile-bottom-nav__item">
+                <div class="mobile-bottom-nav__item-content">
+                    <i class="material-icons"><img
+                            src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/user.svg?v=1727639504933"></i>
+                    perfil
+                </div>
+            </section>
+
+            <section class="mobile-bottom-nav__item">
+                <div class="mobile-bottom-nav__item-content">
+                    <i class="material-icons"><img
+                            src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/phone-call.svg?v=1727639499121"></i>
+                    contato
+                </div>
+            </section>
+        </nav>
+    </div>
+
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const navItems = document.querySelectorAll('.mobile-bottom-nav__item');
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navItems.forEach(nav => nav.classList.remove('mobile-bottom-nav__item--active'));
+
+                item.classList.add('mobile-bottom-nav__item--active');
+            });
+        });
+    });
+</script>
+
+</html>

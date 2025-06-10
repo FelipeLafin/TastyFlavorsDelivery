@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Selecionar Tipo de Usuário</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/selecionar_tipo.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, max-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="icon"
+        href="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/nova%20logo.png?v=1727268802411" />
+    <title>Tasty Flavors - Delivery de comida</title>
+</head>
+<body>
+    <a href="{{ url_for('index') }}" class="voltar">
+        <img src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/arrow-left.svg?v=1727190252399">
+    </a>
+    <form id="tipoForm" action="/login" method="POST">
+        <h2>LOGAR COMO:</h2>
+        {% if error %}
+        <p class="error-message">⚠️{{ error }}⚠️</p>
+        {% endif %}
+
+        <button type="submit" name="tipo" value="restaurante" class="button-restaurante">
+            Restaurante
+        </button>
+        <button type="submit" name="tipo" value="cliente" class="button-cliente">
+            Cliente
+    </form>
+
+    <script>
+        document.getElementById('tipoForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const tipo = document.querySelector('button[type="submit"]').value;
+            if (tipo === 'restaurante') {
+                window.location.href = '/login/restaurante';
+            } else if (tipo === 'cliente') {
+                window.location.href = '/login/cliente';
+            }
+        });
+    </script>
+</body>
+
+</html>

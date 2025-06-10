@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>> Relatório de Vendas <</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150vh;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            background-color: #fab234;
+            padding: 30px;
+            border-radius: 8px;
+            border: 2px solid black;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            color: red;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-top: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 2px solid black;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 12px;
+            text-align: left;
+            background-color: white;
+        }
+
+        th {
+            background-color: white;
+            font-weight: bold;
+            color: #333;
+        }
+
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .button {
+            padding: 8px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .voltar, .logout {
+            position: fixed;
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            top: 20px;
+        }
+
+        .voltar:hover, .logout:hover {
+            background-color: darkred;
+        }
+
+        .voltar {
+            left: 20px;
+        }
+
+        .logout {
+            right: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .voltar, .logout {
+                top: 10px;
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <form action="/login" method="GET">
+        <button class="logout">LOGOUT</button>
+    </form>
+        <form action="/dashboard" method="GET">
+        <button class="voltar">VOLTAR</button>
+    </form>
+
+
+    <div class="container">
+        <h1>> Relatório de Vendas <</h1>
+
+        <h2>Média de Gasto por Cliente</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome do Cliente</th>
+                    <th>Média de Gasto</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cliente in media_gasto %}
+                    <tr>
+                        <td>{{ cliente['nome_cliente'] }}</td>
+                        <td>R$ {{ cliente['media_gasto'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Maior Compra</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Valor da Compra</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ maior_compra['nome_cliente'] }}</td>
+                    <td>R$ {{ maior_compra['total'] }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Maior Pedido (em quantidade de itens)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Quantidade de Itens</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ maior_pedido['nome_cliente'] }}</td>
+                    <td>{{ maior_pedido['quantidade_total'] }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Maior e Menor Comissão</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comissão</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Maior Comissão</td>
+                    <td>R$ {{ comissoes['maior_comissao'] }}</td>
+                </tr>
+                <tr>
+                    <td>Menor Comissão</td>
+                    <td>R$ {{ comissoes['menor_comissao'] }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Item Mais Pedido</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Total Vendido</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ item_mais_pedido['nome_produto'] }}</td>
+                    <td>{{ item_mais_pedido['total_vendido'] }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Quantidade de Pedidos por Status</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Status</th>
+                    <th>Quantidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for status in pedidos_por_status %}
+                    <tr>
+                        <td>{{ status['status'] }}</td>
+                        <td>{{ status['quantidade'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Quantidade Média de Pedidos por Dia da Semana</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Dia da Semana</th>
+                    <th>Quantidade de Pedidos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dia in pedidos_por_dia %}
+                    <tr>
+                        <td>
+                            {% if dia['dia_da_semana'] == '0' %}
+                            Domingo
+                            {% elif dia['dia_da_semana'] == '1' %}
+                            Segunda-feira
+                            {% elif dia['dia_da_semana'] == '2' %}
+                            Terça-feira
+                            {% elif dia['dia_da_semana'] == '3' %}
+                            Quarta-feira
+                            {% elif dia['dia_da_semana'] == '4' %}
+                            Quinta-feira
+                            {% elif dia['dia_da_semana'] == '5' %}
+                            Sexta-feira
+                            {% elif dia['dia_da_semana'] == '6' %}
+                            Sábado
+                            {% endif %}
+                        </td>
+                        <td>{{ dia['quantidade'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
