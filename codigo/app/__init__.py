@@ -326,14 +326,23 @@ def atualizar_status():
     conn.close()
     return redirect('/dashboard')
 
-@app.route('/painel')
+@app.route('/logout', methods=['GET', 'POST'])
+def logout():
+    if 'nome_do_restaurante' in session:
+        session.pop('nome_do_restaurante', None)
+        session.pop('email_restaurante', None)
+        return redirect('/')
+    return render_template('index.html')
+
+
+@app.route('/painel', methods=['GET', 'POST'])
 def painel():
     if 'nome_do_restaurante' in session:
         conn = sqlite3.connect("entregavel.db")
         cursor = conn.cursor()
 
         # Buscar produtos de restaurante com destaque
-        consulta = cursor.execute("""
+        cursor.execute("""
         SELECT nome, preco, imagem
         FROM produtos
     """)

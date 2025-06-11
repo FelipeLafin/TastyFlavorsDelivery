@@ -12,7 +12,6 @@ body {
 .app {
     width: 100%;
     height: 100%;
-    margin: auto;
     background: white;
     overflow: hidden;
 }
@@ -20,7 +19,6 @@ body {
 header {
     background: #f31d2f;
     color: white;
-    padding: 20px;
 }
 
 header h1 {
@@ -69,6 +67,7 @@ header h1 {
     font-size: 1rem;
     margin-left: 10px;
 }
+
 .recommended-grid {
     display: grid;
     flex-wrap: wrap;
@@ -137,8 +136,10 @@ header h1 {
 .perfil {
     width: 48px;
     height: 48px;
+    border: 1px solid black;
     border-radius: 50%;
-    color: white;
+    background-color: white;
+    color: black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -150,7 +151,30 @@ header h1 {
     display: flex;
     align-items: center;
     gap: 10px;
+    top: 30px;
     padding: 20px;
+}
+
+.moto {
+    display: none;
+}
+
+@keyframes slidein {
+    from {
+        left: -30%;
+    }
+
+    to {
+        left: 120%;
+
+    }
+}
+
+.btn {
+    background-color: transparent;
+    border: none;
+    margin-right: 10px;
+    cursor: pointer;
 }
 
 @media (max-width: 750px) {
@@ -161,9 +185,11 @@ header h1 {
         overflow: hidden;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
+
     .recommended {
         margin-bottom: 60px;
     }
+
     .recommended-grid {
         display: grid;
         flex-wrap: wrap;
@@ -198,6 +224,18 @@ header h1 {
         display: flex;
         flex-direction: column;
         justify-content: center;
+    }
+
+    .moto {
+        position: relative;
+        display: flex;
+        z-index: 2;
+        transform: rotateY(180deg);
+        width: 50px;
+        animation-duration: 6.5s;
+        animation-name: slidein;
+        animation-iteration-count: infinite;
+        animation-direction: linear;
     }
 
     .mobile-bottom-nav__item--active {

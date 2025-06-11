@@ -13,6 +13,7 @@
         href="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/nova%20logo.png?v=1727268802411" />
     <title>Tasty Flavors - Delivery de comida</title>
 </head>
+<br>
 
 <body class="fundo">
     <h1 class="cor"> Bateu a fome? Vem de Tasty!</h1>
@@ -21,26 +22,46 @@
         <nav class="nav">
             <a href="/" class="logo"><img
                     src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/Tasty_Flavors_qualidade_melhorada-removebg-preview.png?v=1726575720589"></a>
-            <div class="btn">
-                <a href="{{ url_for('cadastro') }}" class="botão_cadastro">Cadastrar</a>
-                <a href="{{ url_for('entrar') }}" class="botão_login">Entrar</a>
-            </div>
-            <button class="icone_menu"><img
-                    src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/menu.svg?v=1727089620194"></button>
-            <ul class="nav-list">
+            <ul class="nav-list nav-list-bg--active">
                 <li><a href="#"></a></li>
                 <li><a href="#" class="botao_individual">Entregadores</a></li>
                 <li><a href="#" class="botao_individual">Restaurantes</a></li>
                 <li><a href="#" class="botao_individual">Carreira</a></li>
                 <li><a href="#" class="botao_individual">Cartão Tasty</a></li>
+                {% if session.get('nome_do_restaurante') %}
+                <li>
+                    <form action="{{ url_for('logout') }}" method="POST">
+                        <button type="submit" class="botao_individual">Logout</button>
+                    </form>
+                </li>
+                {% endif %}
             </ul>
+
+            {% if session.get('nome_do_restaurante') %}
+            <div class="texto-perfil">
+                <div class="perfil">
+                    {{ session['nome_do_restaurante'][:2]|upper }}
+                </div>
+                <div>
+                    <div style="font-weight: bold;">{{ session['nome_do_restaurante'] }}</div>
+                </div>
+            </div>
+            {% else %}
+            <div class="btn">
+                <a href="{{ url_for('cadastro') }}" class="botão_cadastro">Cadastrar</a>
+                <a href="{{ url_for('entrar') }}" class="botão_login">Entrar</a>
+            </div>
+            {% endif %}
+            <button class="icone_menu"><img
+                    src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/menu.svg?v=1727089620194"></button>
         </nav>
     </header>
     <nav class="mobile-bottom-nav">
         <section class="mobile-bottom-nav__item mobile-bottom-nav__item--active">
             <div class="mobile-bottom-nav__item-content">
                 <i class="material-icons"><img
-                        src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/home.svg?v=1727639490871"></i>
+                        src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/home.svg?v=1727639490871"
+                        width='27px;' height='27px;'></i>
                 menu
             </div>
         </section>
@@ -48,15 +69,24 @@
         <section class="mobile-bottom-nav__item">
             <div class="mobile-bottom-nav__item-content">
                 <i class="material-icons"><img
-                        src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/envelope.svg?v=1727639475152"></i>
+                        src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/envelope.svg?v=1727639475152"
+                        width='27px;' height='27px;'></i>
                 email
             </div>
         </section>
 
         <section class="mobile-bottom-nav__item">
-            <div class="mobile-bottom-nav__item-content">
-                <i class="material-icons"><img
-                        src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/user.svg?v=1727639504933"></i>
+            <div class="mobile-bottom-nav__item-content" style="align-items: center;">
+                <i class="material-icons">
+                    {% if session.get('nome_do_restaurante') %}
+                    <div class="perfil">
+                        {{ session['nome_do_restaurante'][:2]|upper }}
+                    </div>
+                    {% else %}
+                    <img src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/user.svg?v=1727639504933"
+                        width='27px;' height='27px;'>
+                    {% endif %}
+                </i>
                 perfil
             </div>
         </section>
@@ -64,7 +94,8 @@
         <section class="mobile-bottom-nav__item">
             <div class="mobile-bottom-nav__item-content">
                 <i class="material-icons"><img
-                        src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/phone-call.svg?v=1727639499121"></i>
+                        src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/phone-call.svg?v=1727639499121"
+                        width='27px;' height='27px;'></i>
                 contato
             </div>
         </section>
@@ -112,6 +143,7 @@
 
         menuButton.addEventListener('click', () => {
             navList.classList.toggle('active');
+            navList.classList.toggle('after');
         });
 
         navItems.forEach(function (e, i) {

@@ -12,20 +12,25 @@
 
 <body>
     <div class="app">
-        <header>
+        <header style="border-bottom: 1px solid black;">
             <div class="texto-perfil">
                 <div class="perfil">
                     {{ session['nome_do_restaurante'][:2]|upper }}
                 </div>
                 <div>
                     <div style="font-weight: bold;">{{ session['nome_do_restaurante'] }}</div>
-                    <div style="font-size: small; color: #e2e2e2;">{{ session['email_restaurante'] }}</div>
+                    <div style="font-size: small; color: white;">{{ session['email_restaurante'] }}</div>
                 </div>
             </div>
+               <img class="moto"
+                src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/bike.png?v=1727182940819">
         </header>
 
         <div class="search-bar">
             <input type="text" placeholder="Pesquisar...">
+            <button class="btn">
+                <img style="width: 25px;" src="https://img.icons8.com/?size=100&id=7695&format=png&color=000000">
+            </button>
         </div>
 
         <div class="categories">
@@ -51,40 +56,41 @@
                 {% endfor %}
             </div>
         </div>
-        <nav class="mobile-bottom-nav">
-            <section class="mobile-bottom-nav__item mobile-bottom-nav__item--active">
-                <div class="mobile-bottom-nav__item-content">
-                    <i class="material-icons"><img
-                            src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/home.svg?v=1727639490871"></i>
-                    menu
-                </div>
-            </section>
+            <nav class="mobile-bottom-nav">
+                <section class="mobile-bottom-nav__item mobile-bottom-nav__item--active">
+                    <div class="mobile-bottom-nav__item-content">
+                        <a class="material-icons" href="{{ url_for('index') }}"><img
+                                src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/home.svg?v=1727639490871"></a>
+                        menu
+                        </button>
+                    </div>
+                </section>
 
-            <section class="mobile-bottom-nav__item">
-                <div class="mobile-bottom-nav__item-content">
-                    <i class="material-icons"><img
-                            src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/envelope.svg?v=1727639475152"></i>
-                    email
-                </div>
-            </section>
+                <section class="mobile-bottom-nav__item">
+                    <div class="mobile-bottom-nav__item-content">
+                        <i class="material-icons"><img
+                                src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/envelope.svg?v=1727639475152"></i>
+                        email
+                    </div>
+                </section>
 
-            <section class="mobile-bottom-nav__item">
-                <div class="mobile-bottom-nav__item-content">
-                    <i class="material-icons"><img
-                            src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/user.svg?v=1727639504933"></i>
-                    perfil
-                </div>
-            </section>
+                <section class="mobile-bottom-nav__item">
+                    <div class="mobile-bottom-nav__item-content">
+                        <i class="material-icons"><img
+                                src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/user.svg?v=1727639504933"></i>
+                        perfil
+                    </div>
+                </section>
 
-            <section class="mobile-bottom-nav__item">
-                <div class="mobile-bottom-nav__item-content">
-                    <i class="material-icons"><img
-                            src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/phone-call.svg?v=1727639499121"></i>
-                    contato
-                </div>
-            </section>
-        </nav>
-    </div>
+                <section class="mobile-bottom-nav__item">
+                    <div class="mobile-bottom-nav__item-content">
+                        <i class="material-icons"><img
+                                src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/phone-call.svg?v=1727639499121"></i>
+                        contato
+                    </div>
+                </section>
+            </nav>
+        </div>
 
 </body>
 <script>
