@@ -6,7 +6,7 @@
 }
 
 body {
-    background: #f1fdf6;
+    background: white;
 }
 
 .app {
@@ -54,10 +54,11 @@ header h1 {
 .search-bar {
     display: flex;
     align-items: center;
-    background: #fff;
+    background: white;
     margin: 10px 15px;
     padding: 10px;
     border-radius: 20px;
+    border: 1px solid black;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -74,6 +75,7 @@ header h1 {
     grid-template-columns: repeat(5, 0.5fr);
     gap: 20px;
 }
+
 .recommended,
 .item-details {
     padding: 15px;
@@ -158,6 +160,9 @@ header h1 {
         background: white;
         overflow: hidden;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .recommended {
+        margin-bottom: 60px;
     }
     .recommended-grid {
         display: grid;
