@@ -1,84 +1,123 @@
-body {
-font-family: 'Roboto Slab', serif;
-background: #FDB033;
-padding: 0;
-min-height: 100vh;
-overflow: hidden;
-display: flex;
-flex-direction: column;
-align-items: center;
+body{
+    font-family: 'Roboto Slab', serif;
+    background: #FDB033;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 h2 {
-color: #d35400;
-margin-bottom: 24px;
-font-weight: 700;
-align-self: center;
-letter-spacing: 1px;
+    color: #d35400;
+    margin-bottom: 24px;
+    font-weight: 700;
+    align-self: center;
+    letter-spacing: 1px;
 }
 
 form {
-background: #fff;
-padding: 32px 40px;
-border-radius: 16px;
-border: 1px solid black;
-box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-display: flex;
-margin-top: 200px;
-flex-direction: column;
-align-items: flex-start;
+    background: #fff;
+    padding: 32px 40px;
+    border-radius: 16px;
+    border: 1px solid black;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    display: flex;
+    margin-top: 200px;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
 label {
-font-size: 1.1rem;
-color: #333;
-margin-bottom: 12px;
-cursor: pointer;
-display: flex;
-align-items: center;
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 input[type="radio"] {
-accent-color: #d35400;
-margin-right: 10px;
-transform: scale(1.2);
+    accent-color: #d35400;
+    margin-right: 10px;
+    transform: scale(1.2);
 }
 
 button[type="submit"] {
-background: #d35400;
-color: #fff;
-border: none;
-width: 300px;
-padding: 12px 32px;
-border-radius: 8px;
-font-size: 1rem;
-font-family: inherit;
-font-weight: 600;
-cursor: pointer;
-transition: background 0.2s;
-margin-top: 16px;
+    background: #d35400;
+    color: #fff;
+    border: none;
+    width: 300px;
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 16px;
 }
 
 button[type="submit"]:hover {
-background: #b34700;
+    background: #b34700;
 }
 
 .voltar {
-top: 2%;
-margin-right: 90%;
-position: absolute;
-display: inline-block;
-cursor: pointer;
-border: none;
-color: black;
-font-size: 14px;
-font-weight: bold;
-padding: 5px 12px;
-text-decoration: none;
-text-shadow: 0px 1px 0px grey;
+    top: 2%;
+    margin-right: 90%;
+    position: absolute;
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 12px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px grey;
 }
+
 @media (max-width: 750px) {
     form {
-        margin-top: 50%;
+        width: 100%;
+        max-width: 400px;
+        padding: 32px 20px;
+        margin-top: 200px;
+        background: #fff;
+        border-radius: 16px;
+        border: 1px solid black;
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
     }
+
+    button[type="submit"] {
+        background: #d35400;
+        color: #fff;
+        border: none;
+        width: 90%;
+        padding: 12px 32px;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-family: inherit;
+        font-weight: 600;
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        transition: background 0.2s;
+        margin-top: 16px;
+    }
+
+    button[type="submit"]:hover {
+        background: #b34700;
+    }
+
 }

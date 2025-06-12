@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Perfil</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Editar Perfil</h2>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul style="color: red; list-style: none; padding: 0;">
+              {% for msg in messages %}
+                <li>{{ msg }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST" enctype="multipart/form-data">
+            <label for="foto_perfil"><strong>Enviar nova foto:</strong></label><br><br>
+            <input type="file" name="foto_perfil" accept="image/*"><br><br>
+
+            <div class="botoes">
+                <button type="submit" class="btn-editar">Atualizar</button>
+                <a href="{{ url_for('painel') }}" class="btn-voltar">Voltar</a>
+            </div>
+        </form>
+
+        {% if restaurante[1] %}
+            <h3 style="margin-top: 30px;">Foto atual:</h3>
+            <img src="{{ url_for('static', filename='uploads/' + restaurante[1]) }}" alt="Foto de perfil" class="perfil-foto">
+        {% endif %}
+    </div>
+</body>
+</html>

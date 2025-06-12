@@ -1,0 +1,73 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 500px;
+    margin: 60px auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    text-align: center;
+}
+
+.perfil-foto {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ff4747;
+    margin-bottom: 15px;
+}
+
+.nome-restaurante {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.email-restaurante {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.botoes {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.botoes a, .botoes button {
+    padding: 10px 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-editar {
+    background-color: #ff4747;
+    color: white;
+}
+
+.btn-editar:hover {
+    background-color: #e03838;
+}
+
+.btn-voltar {
+    background-color: #ddd;
+    color: #333;
+}
+
+.btn-voltar:hover {
+    background-color: #ccc;
+}

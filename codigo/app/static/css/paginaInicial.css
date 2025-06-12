@@ -133,9 +133,27 @@ header h1 {
     margin-bottom: 10%;
 }
 
+.popup-editar {
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    border-radius: 8px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.popup-editar a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
 .perfil {
-    width: 48px;
-    height: 48px;
+    width: 50px;
+    height: 50px;
     border: 1px solid black;
     border-radius: 50%;
     background-color: white;
@@ -145,6 +163,11 @@ header h1 {
     justify-content: center;
     font-size: 18px;
     font-weight: bold;
+}
+
+.perfil img {
+    align-items: center;
+    justify-content: center;
 }
 
 .texto-perfil {
@@ -196,6 +219,7 @@ header h1 {
         grid-template-columns: repeat(2, 0.5fr);
         gap: 20px;
     }
+
     .order-button {
         background: #f31d2f;
         color: white;

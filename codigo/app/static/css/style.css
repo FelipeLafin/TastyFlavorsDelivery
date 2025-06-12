@@ -100,8 +100,7 @@ a {
 }
 
 .fundo {
-    margin-top: 20%;
-    background: center / cover no-repeat url("https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/Story%20Agendou%20Chegou%20Amarelo%20Popular_20241101_112122_0000.png?v=1730471031958");
+    background: #f8b40c;
 }
 
 .icone_menu {
@@ -226,10 +225,10 @@ footer {
 .perfil {
     width: 48px;
     height: 48px;
-    border: 1px solid black;
+    border: 2px solid black;
     border-radius: 50%;
-    background-color: white;
-    color: black;
+    background-color: rgb(255, 89, 0);
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -308,27 +307,19 @@ footer {
     }
 
     .cor {
-        color: transparent;
+        margin-top: 200px;
+        color: black;
         text-align: center;
-        font-size: 35px;
-        margin-top: 40%;
+        font-size: 30px;
         font-weight: bold;
-
     }
 
     .meio {
+        margin-top: auto;
         font-weight: bold;
-        color: transparent;
-        margin-top: 10%;
-        font-size: 30px;
+        color: black;
+        font-size: 25px;
         text-align: center;
-    }
-
-    .fundo {
-        z-index: 0;
-        width: 100%;
-        margin-top: 600px;
-        background: center / no-repeat url("https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/Story%20Agendou%20Chegou%20Amarelo%20Popular_20241101_112122_0000.png?v=1730471031958");
     }
 
     .icone_menu {
@@ -352,14 +343,19 @@ footer {
         pointer-events: none;
     }
 
-    .texto-perfil {
-        display: none !important;
-    }
-
     .nav-list a {
         font-size: 16px;
         gap: 5px;
         color: white;
+    }
+
+    .perfil-foto {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #ff4747;
+        margin-bottom: 15px;
     }
 
     .nav-list button {

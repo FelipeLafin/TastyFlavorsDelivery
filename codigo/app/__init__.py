@@ -2,10 +2,15 @@ from datetime import datetime
 import re
 import sqlite3
 import os
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, url_for, flash
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__, template_folder=os.path.join(os.path.dirname(__file__), 'templates'))
 app.secret_key = os.urandom(24)
+app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), 'static', 'uploads')
+app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024
+
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 def get_db_connection():
     connection = sqlite3.connect('entregavel.db')
@@ -18,7 +23,7 @@ def menu():
 
 @app.route('/index')
 def index():
-    return render_template('index.html')
+    return render_template('login_rest.html')
 
 @app.route('/administrativo')
 def administrativo():
@@ -144,7 +149,9 @@ def login_restaurante():
         if resultado:
             session['nome_do_restaurante'] = resultado['nome_do_restaurante']
             session['email_restaurante'] = resultado['email']
-            if session['nome_do_restaurante']:
+            session['id_restaurante'] = resultado['id_restaurante']
+
+            if session['id_restaurante']:
                 return redirect('/painel')
         else:
             return False
@@ -337,16 +344,67 @@ def logout():
 
 @app.route('/painel', methods=['GET', 'POST'])
 def painel():
-    if 'nome_do_restaurante' in session:
+    if 'id_restaurante' in session:
         conn = sqlite3.connect("entregavel.db")
         cursor = conn.cursor()
 
-        # Buscar produtos de restaurante com destaque
+        # Buscar produtos recomendados do restaurante que pagou a maior comissão para o app
         cursor.execute("""
         SELECT nome, preco, imagem
         FROM produtos
-    """)
+        """)
         produtos_recomendados = cursor.fetchall()
-        return render_template("paginaInicial.html", recomendados=produtos_recomendados)
+
+        # Buscar dados do restaurante logado
+        cursor.execute("""
+        SELECT nome_do_restaurante, foto_perfil
+        FROM restaurante
+        WHERE id_restaurante = ?
+        """, (session['id_restaurante'],))
+        restaurante = cursor.fetchone()
+        cursor.close()
+
+        return render_template("paginaInicial.html", recomendados=produtos_recomendados, restaurante=restaurante)
     return redirect('/login_rest')
-    
+
+@app.route('/perfil', methods=['GET', 'POST'])
+def perfil():
+    if 'id_restaurante' not in session:
+        return redirect('/login/restaurante')
+
+    if request.method == 'POST':
+        if 'foto_perfil' not in request.files:
+            flash('Nenhum arquivo enviado.')
+            return redirect(request.url)
+        
+        file = request.files['foto_perfil']
+        
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            # Renomeia para o ID do usuário (ex: 3.jpg)
+            extensao = filename.rsplit('.', 1)[1].lower()
+            novo_nome = f"{session['id_restaurante']}.{extensao}"
+            caminho = os.path.join(app.config['UPLOAD_FOLDER'], novo_nome)
+            file.save(caminho)
+
+            # Atualiza o caminho no banco de dados (exemplo com SQLite)
+            con = sqlite3.connect('entregavel.db')
+            cur = con.cursor()
+            cur.execute("UPDATE restaurante SET foto_perfil = ? WHERE id_restaurante = ?", (novo_nome, session['id_restaurante']))
+            con.commit()
+            con.close()
+
+            flash('Foto de perfil atualizada!')
+            return redirect(url_for('perfil'))
+
+    # Buscar foto atual do usuário
+    con = sqlite3.connect('entregavel.db')
+    cur = con.cursor()
+    cur.execute("SELECT nome_do_restaurante, foto_perfil FROM restaurante WHERE id_restaurante = ?", (session['id_restaurante'],))
+    restaurante = cur.fetchone()
+    con.close()
+
+    return render_template('perfil.html', restaurante=restaurante)
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS

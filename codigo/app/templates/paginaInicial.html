@@ -14,15 +14,24 @@
     <div class="app">
         <header style="border-bottom: 1px solid black;">
             <div class="texto-perfil">
-                <div class="perfil">
+                <div id="botao-perfil" class="perfil" style="cursor: pointer;">
+                    {% if restaurante[1] %}
+                    <img class="perfil" src="{{ url_for('static', filename='uploads/' + restaurante[1]) }}">
+                    {% else %}
                     {{ session['nome_do_restaurante'][:2]|upper }}
+                    {% endif %}
                 </div>
+
+                <div id="popup-editar" class="popup-editar" style="display: none;">
+                    <a href="{{ url_for('perfil') }}">Editar perfil</a>
+                </div>
+
                 <div>
                     <div style="font-weight: bold;">{{ session['nome_do_restaurante'] }}</div>
                     <div style="font-size: small; color: white;">{{ session['email_restaurante'] }}</div>
                 </div>
             </div>
-               <img class="moto"
+            <img class="moto"
                 src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/bike.png?v=1727182940819">
         </header>
 
@@ -56,55 +65,69 @@
                 {% endfor %}
             </div>
         </div>
-            <nav class="mobile-bottom-nav">
-                <section class="mobile-bottom-nav__item mobile-bottom-nav__item--active">
-                    <div class="mobile-bottom-nav__item-content">
-                        <a class="material-icons" href="{{ url_for('index') }}"><img
-                                src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/home.svg?v=1727639490871"></a>
-                        menu
-                        </button>
-                    </div>
-                </section>
+        <nav class="mobile-bottom-nav">
+            <section class="mobile-bottom-nav__item mobile-bottom-nav__item--active">
+                <div class="mobile-bottom-nav__item-content">
+                    <a class="material-icons" href="{{ url_for('index') }}"><img
+                            src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/home.svg?v=1727639490871"></a>
+                    menu
+                    </button>
+                </div>
+            </section>
 
-                <section class="mobile-bottom-nav__item">
-                    <div class="mobile-bottom-nav__item-content">
-                        <i class="material-icons"><img
-                                src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/envelope.svg?v=1727639475152"></i>
-                        email
-                    </div>
-                </section>
+            <section class="mobile-bottom-nav__item">
+                <div class="mobile-bottom-nav__item-content">
+                    <i class="material-icons"><img
+                            src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/envelope.svg?v=1727639475152"></i>
+                    email
+                </div>
+            </section>
 
-                <section class="mobile-bottom-nav__item">
-                    <div class="mobile-bottom-nav__item-content">
-                        <i class="material-icons"><img
-                                src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/user.svg?v=1727639504933"></i>
-                        perfil
-                    </div>
-                </section>
+            <section class="mobile-bottom-nav__item">
+                <div class="mobile-bottom-nav__item-content">
+                    <i class="material-icons"><img
+                            src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/user.svg?v=1727639504933"></i>
+                    perfil
+                </div>
+            </section>
 
-                <section class="mobile-bottom-nav__item">
-                    <div class="mobile-bottom-nav__item-content">
-                        <i class="material-icons"><img
-                                src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/phone-call.svg?v=1727639499121"></i>
-                        contato
-                    </div>
-                </section>
-            </nav>
-        </div>
+            <section class="mobile-bottom-nav__item">
+                <div class="mobile-bottom-nav__item-content">
+                    <i class="material-icons"><img
+                            src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/phone-call.svg?v=1727639499121"></i>
+                    contato
+                </div>
+            </section>
+        </nav>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navItems = document.querySelectorAll('.mobile-bottom-nav__item');
 
-</body>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const navItems = document.querySelectorAll('.mobile-bottom-nav__item');
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    navItems.forEach(nav => nav.classList.remove('mobile-bottom-nav__item--active'));
 
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                navItems.forEach(nav => nav.classList.remove('mobile-bottom-nav__item--active'));
-
-                item.classList.add('mobile-bottom-nav__item--active');
+                    item.classList.add('mobile-bottom-nav__item--active');
+                });
             });
         });
-    });
-</script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const botaoPerfil = document.getElementById('botao-perfil');
+            const popup = document.getElementById('popup-editar');
+
+            botaoPerfil?.addEventListener('click', function () {
+                popup.style.display = (popup.style.display === 'none') ? 'block' : 'none';
+            });
+
+            document.addEventListener('click', function (event) {
+                if (!botaoPerfil.contains(event.target) && !popup.contains(event.target)) {
+                    popup.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
 
 </html>
