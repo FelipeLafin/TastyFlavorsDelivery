@@ -23,7 +23,7 @@ def menu():
 
 @app.route('/index')
 def index():
-    return render_template('login_rest.html')
+    return render_template('index.html')
 
 @app.route('/administrativo')
 def administrativo():

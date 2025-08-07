@@ -36,10 +36,26 @@
                 </li>
                 {% endif %}
             </ul>
+            {% if session.get('id_restaurante') %}
+            <div class="perfil-container" style="display: flex; align-items: center;">
+                <div id="botao-perfil" class="perfil" style="cursor: pointer;">
+                    {% if session.get['nome_do_restaurante'] %}
+                    <img class="perfil-img" src="{{ url_for('static', filename='uploads/' + restaurante[1]) }}"
+                        alt="Perfil">
+                    {% else %}
+                    <span class="perfil-iniciais">{{ session['nome_do_restaurante'][:2]|upper }}</span>
+                    {% endif %}
+                </div>
+                <div style="margin-left: 5px;">
+                    {{ session['nome_do_restaurante'] }}
+                </div>
+            </div>
+            {% else %}
             <div class="btn">
                 <a href="{{ url_for('cadastro') }}" class="botão_cadastro">Cadastrar</a>
                 <a href="{{ url_for('entrar') }}" class="botão_login">Entrar</a>
             </div>
+            {% endif %}
             <button class="icone_menu"><img
                     src="https://cdn.glitch.global/4d2a15bb-9968-4387-ad6b-c451b32c0162/menu.svg?v=1727089620194">
             </button>
